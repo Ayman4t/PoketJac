@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#080b12">
 <meta name="description" content="صندوق المقالب الذكية: صاعق كهربائي، ماكينة حلاقة، سوط حركي، كشف كذب وكسر شاشة وهمي. كل المؤثرات تُولَّد داخل المتصفح دون تحميل أي ملفات.">
-<title>صندوق المقالب الذكية | PocketJak</title>
+<title>صندوق المقالب الذكية | PocketPrank</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
@@ -31,6 +31,7 @@ button{touch-action:manipulation;-webkit-user-select:none;user-select:none}
 @keyframes al{50%{background:#7f1d1d}}
 .alarm{animation:al .25s steps(2) infinite;border-color:var(--rd)!important}.okk{box-shadow:0 0 30px var(--gr);border-color:var(--gr)!important}
 .mb.on{background:var(--cy);color:#042f3a}
+.tip{display:none}body.tips .tip{display:block}
 #fl{position:fixed;inset:0;z-index:80;pointer-events:none;opacity:0}
 dialog{color:#e5e7eb;max-width:90vw}dialog::backdrop{background:#000a}
 summary{cursor:pointer;font-weight:700;padding:6px 0}
@@ -40,7 +41,7 @@ summary{cursor:pointer;font-weight:700;padding:6px 0}
 <body class="pb-24">
 <div id="fl"></div>
 <header class="sticky top-0 z-30 flex items-center justify-between px-3 py-2 border-b border-slate-800" style="background:#060910ee;backdrop-filter:blur(8px)">
-<h1 class="font-black text-base">⚡ جيب المقالب | PocketPrank</h1>
+<h1 class="font-black text-base select-none">⚡ جيب المقالب | PocketPrank</h1>
 <div class="flex gap-1 text-xs">
 <button id="sb" class="px-2 py-1 rounded-full bg-emerald-900 text-emerald-300" aria-pressed="true">🔊 صوت</button>
 <button id="hb" class="px-2 py-1 rounded-full bg-violet-900 text-violet-300" aria-pressed="true">📳 اهتزاز</button>
@@ -53,7 +54,7 @@ summary{cursor:pointer;font-weight:700;padding:6px 0}
 <h2 class="font-black text-lg">⚡ الصاعق الكهربائي</h2>
 <canvas id="tz" width="320" height="230" class="mx-auto w-full max-w-xs"></canvas>
 <button id="tzb" class="big" style="background:linear-gradient(#0e7490,#164e63);border:2px solid var(--cy)">اضغط مطولاً للصعق ⚡</button>
-<p class="text-xs text-slate-400">⚠️ تنبيه: وميض ضوئي سريع، لا تستخدمه مع من يعاني حساسية الضوء.</p>
+
 </section>
 
 <section class="tab pan p-3 text-center space-y-4" id="t1">
@@ -62,15 +63,15 @@ summary{cursor:pointer;font-weight:700;padding:6px 0}
 <div style="height:150px;background:linear-gradient(90deg,#334155,#e2e8f0 45%,#475569);border-radius:40px 40px 14px 14px;position:relative"><div style="position:absolute;top:18px;left:50%;margin-left:-6px;width:12px;height:50px;border-radius:6px;background:#0f172a"></div><div style="position:absolute;bottom:14px;width:100%;font-weight:900;color:#0f172a;font-size:13px">PRO CUT</div></div>
 <div dir="ltr" style="overflow:hidden;background:#475569"><div class="teeth"></div></div></div>
 <button id="clsw" dir="ltr" class="relative mx-auto block rounded-full bg-slate-700 border border-slate-500" style="width:96px;height:48px" aria-label="مفتاح التشغيل"><i id="kn" style="position:absolute;top:4px;left:4px;width:38px;height:38px;border-radius:50%;background:#e2e8f0;transition:left .15s"></i></button>
-<p class="text-xs text-slate-400">حرّك المفتاح للتشغيل، ثم قرّبه من رأس صديقك.</p>
+<p class="tip text-xs text-slate-400">حرّك المفتاح للتشغيل، ثم قرّبه من رأس صديقك.</p>
 </section>
 
 <section class="tab pan p-3 text-center space-y-3" id="t2">
 <h2 class="font-black text-lg">💥 السوط الحركي</h2>
 <div class="relative mx-auto" style="width:200px;height:200px"><div id="wr" style="position:absolute;inset:0;border-radius:50%;border:6px solid #fff;opacity:0;transform:scale(.3);transition:all .12s"></div><div class="absolute inset-0 flex items-center justify-center text-7xl">💥</div></div>
 <button id="wbtn" class="big bg-amber-600 active:bg-amber-500">اضغط للطرقعة</button>
-<button id="wen" class="text-sm underline text-cyan-300">تفعيل حساس الحركة</button>
-<p id="wst" class="text-xs text-slate-400">لوّح بالهاتف بقوة في الهواء (تسارع أكبر من 30 م/ث²) أو اضغط الزر.</p>
+<button id="wen" class="tip text-sm underline text-cyan-300 mx-auto">تفعيل حساس الحركة</button>
+<p id="wst" class="tip text-xs text-slate-400">لوّح بالهاتف بقوة في الهواء (تسارع أكبر من 30 م/ث²) أو اضغط الزر.</p>
 </section>
 
 <section class="tab pan p-3 text-center space-y-3" id="t3">
@@ -78,15 +79,15 @@ summary{cursor:pointer;font-weight:700;padding:6px 0}
 <p class="text-sm text-slate-300">ضع الإصبع على البصمة وثبّته 3 ثوانٍ.</p>
 <div id="fz" class="relative mx-auto overflow-hidden rounded-2xl border-2 border-cyan-700" style="width:200px;height:260px;background:#0b1220;touch-action:none"><svg id="fp" viewBox="0 0 100 130" class="w-full h-full" fill="none" stroke="#22d3ee" stroke-width="1.6" opacity=".75"></svg><div id="lz"></div></div>
 <div id="lres" class="pan py-4 font-black text-xl border-2 border-slate-700">جاهز للفحص</div>
-<p class="text-xs text-slate-500">سرّ صاحب الهاتف: النصف العلوي = صادق، النصف السفلي = كاذب.</p>
+<p class="tip text-xs text-slate-500">سرّ صاحب الهاتف: النصف العلوي = صادق، النصف السفلي = كاذب.</p>
 </section>
 
 <section class="tab pan p-3 text-center space-y-3" id="t4">
 <h2 class="font-black text-lg">📱 كسر الشاشة الوهمي</h2>
 <div class="flex gap-2"><button class="mb on flex-1 py-3 rounded-xl bg-slate-800 font-bold" data-m="0">كسر عند أول لمسة</button><button class="mb flex-1 py-3 rounded-xl bg-slate-800 font-bold" data-m="1">كسر فوري</button></div>
-<p id="bdesc" class="text-sm text-slate-300"></p>
+<p id="bdesc" class="tip text-sm text-slate-300"></p>
 <button id="arm" class="big bg-red-700 active:bg-red-600"></button>
-<p class="text-xs text-slate-400">للخروج: انقر مرتين بسرعة على الزاوية العلوية اليمنى من الشاشة. لا تستخدمه مع كبار السن أو من لا يحتمل المفاجآت.</p>
+<p class="tip text-xs text-slate-400">للخروج: انقر مرتين بسرعة على الزاوية العلوية اليمنى من الشاشة. لا تستخدمه مع كبار السن أو من لا يحتمل المفاجآت.</p>
 </section>
 
 <article class="pan p-4 space-y-3 text-sm leading-7 text-slate-300">
@@ -100,7 +101,7 @@ summary{cursor:pointer;font-weight:700;padding:6px 0}
 <h3 class="font-bold text-cyan-300">الرسم على Canvas</h3>
 <p>يُرسم تشقق الزجاج والصواعق الكهربائية بخوارزميات عشوائية: خطوط شعاعية تنطلق من نقطة اللمس وحلقات متعرجة تربط بينها وتظلل القطع بدرجات داكنة وفاتحة لتبدو كزجاج حقيقي.</p>
 <h3 class="font-bold text-cyan-300">آداب المزاح</h3>
-<p>اختر شخصاً يتقبل المزاح، واكشف المقلب فوراً، ولا تستخدمه في الأماكن العامة أو أثناء القيادة أو مع الأطفال الصغار والمصابين بأمراض القلب.</p>
+<p>اختر شخصاً يتقبل المزاح، واكشف المقلب فوراً، ولا تستخدمه في الأماكن العامة أو أثناء القيادة أو مع الأطفال الصغار والمصابين بأمراض القلب. تنبيه: تتضمن بعض المؤثرات وميضاً ضوئياً سريعاً قد لا يناسب من يعانون حساسية الضوء.</p>
 <div id="faq" class="pt-2 border-t border-slate-700"><h2 class="font-black text-lg text-white mb-1">الأسئلة الشائعة</h2></div>
 </article>
 
@@ -117,18 +118,19 @@ summary{cursor:pointer;font-weight:700;padding:6px 0}
 
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],rnd=(a,b)=>a+Math.random()*(b-a);
-let AC,MG,NB,snd=true,hap=true;
+let AC,MG,LB,NB,snd=true,hap=true;
 const vib=p=>{if(hap&&navigator.vibrate)navigator.vibrate(p)},vstop=()=>navigator.vibrate&&navigator.vibrate(0);
-function au(){if(!AC){AC=new(window.AudioContext||window.webkitAudioContext)();MG=AC.createGain();MG.connect(AC.destination);const n=AC.sampleRate*2,b=AC.createBuffer(1,n,AC.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;NB=b}
+function au(){if(!AC){AC=new(window.AudioContext||window.webkitAudioContext)();MG=AC.createGain();MG.connect(AC.destination);LB=AC.createGain();LB.gain.value=3;const cp=AC.createDynamicsCompressor();cp.threshold.value=-14;cp.knee.value=6;cp.ratio.value=10;cp.attack.value=.002;cp.release.value=.08;LB.connect(cp);cp.connect(MG);const n=AC.sampleRate*2,b=AC.createBuffer(1,n,AC.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;NB=b}
 if(AC.state==='suspended')AC.resume();MG.gain.value=snd?1:0}
 const noise=l=>{const s=AC.createBufferSource();s.buffer=NB;s.loop=!!l;return s};
 function env(g,t,a,pk,d){g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(pk,t+a);g.gain.exponentialRampToValueAtTime(.0001,t+a+d)}
-function tone(ty,f,t,d,v,f2){const o=AC.createOscillator(),g=AC.createGain();o.type=ty;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);env(g,t,.005,v,d);o.connect(g);g.connect(MG);o.start(t);o.stop(t+d+.05)}
-function burst(t,d,v,ft,fv,q){const s=noise(),f=AC.createBiquadFilter(),g=AC.createGain();f.type=ft;f.frequency.value=fv;f.Q.value=q||1;env(g,t,.001,v,d);s.connect(f);f.connect(g);g.connect(MG);s.start(t,Math.random());s.stop(t+d+.05)}
+function tone(ty,f,t,d,v,f2,out){const o=AC.createOscillator(),g=AC.createGain();o.type=ty;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);env(g,t,.005,v,d);o.connect(g);g.connect(out||MG);o.start(t);o.stop(t+d+.05)}
+function burst(t,d,v,ft,fv,q,out){const s=noise(),f=AC.createBiquadFilter(),g=AC.createGain();f.type=ft;f.frequency.value=fv;f.Q.value=q||1;env(g,t,.001,v,d);s.connect(f);f.connect(g);g.connect(out||MG);s.start(t,Math.random());s.stop(t+d+.05)}
 function flash(c,ms){const f=$('#fl');f.style.background=c;f.style.opacity=1;setTimeout(()=>f.style.opacity=0,ms)}
 $('#sb').onclick=e=>{snd=!snd;e.target.style.opacity=snd?1:.4;e.target.setAttribute('aria-pressed',snd);if(MG)MG.gain.value=snd?1:0};
 $('#hb').onclick=e=>{hap=!hap;e.target.style.opacity=hap?1:.4;e.target.setAttribute('aria-pressed',hap)};
 if(!navigator.vibrate)$('#hb').textContent='📳 غير مدعوم';
+let tapN=0,tapT;$('h1').addEventListener('click',()=>{tapN++;clearTimeout(tapT);tapT=setTimeout(()=>tapN=0,600);if(tapN>=3){tapN=0;document.body.classList.toggle('tips')}});
 
 /* tabs */
 $$('.nb').forEach((b,i)=>b.onclick=()=>{stopAll();$$('.tab').forEach((e,j)=>e.classList.toggle('on',i===j));$$('.nb').forEach((e,j)=>e.classList.toggle('on',i===j));scrollTo(0,0)});
@@ -142,10 +144,10 @@ tx.fillStyle='#cbd5e1';tx.fillRect(112,70,12,72);tx.fillRect(196,70,12,72);tx.be
 if(tOn)for(let k=0;k<3;k++){tx.beginPath();tx.moveTo(118,66);for(let s=1;s<=9;s++)tx.lineTo(118+s*84/9,s<9?66+(Math.random()-.5)*(36+k*10):66);const c=k%2?'#a78bfa':'#22d3ee';tx.strokeStyle=k%2?'#ddd6fe':'#a5f3fc';tx.lineWidth=k?1.5:3;tx.shadowColor=c;tx.shadowBlur=14;tx.stroke()}tx.shadowBlur=0}
 function tzLoop(){tzDraw();if(tOn)requestAnimationFrame(tzLoop)}
 function tzStart(e){e.preventDefault();if(tOn)return;au();tOn=1;
-tN=noise(1);const bp=AC.createBiquadFilter();bp.type='bandpass';bp.frequency.value=3000;bp.Q.value=.8;tG=AC.createGain();tG.gain.value=.5;
-tO=AC.createOscillator();tO.type='sawtooth';tO.frequency.value=900;const og=AC.createGain();og.gain.value=.12;
-tN.connect(bp);bp.connect(tG);tO.connect(og);og.connect(tG);tG.connect(MG);tN.start();tO.start();
-tI=setInterval(()=>{const n=AC.currentTime;tO.frequency.setValueAtTime(rnd(300,3800),n);bp.frequency.setValueAtTime(rnd(1500,6500),n);tG.gain.setValueAtTime(Math.random()>.35?rnd(.3,1):.03,n);flash(Math.random()>.5?'#fff':'#22d3ee',40)},45);
+tN=noise(1);const bp=AC.createBiquadFilter();bp.type='bandpass';bp.frequency.value=3000;bp.Q.value=.5;tG=AC.createGain();tG.gain.value=4;
+tO=AC.createOscillator();tO.type='sawtooth';tO.frequency.value=900;const og=AC.createGain();og.gain.value=.6;
+tN.connect(bp);bp.connect(tG);tO.connect(og);og.connect(tG);const ws=AC.createWaveShaper(),cv=new Float32Array(256);for(let i=0;i<256;i++)cv[i]=Math.tanh((i/128-1)*6);ws.curve=cv;tG.connect(ws);ws.connect(LB);tN.start();tO.start();
+tI=setInterval(()=>{const n=AC.currentTime;tO.frequency.setValueAtTime(rnd(300,3800),n);bp.frequency.setValueAtTime(rnd(1500,6500),n);tG.gain.setValueAtTime(Math.random()>.3?rnd(3,9):.4,n);flash(Math.random()>.5?'#fff':'#22d3ee',40)},45);
 vib([40,20,40]);tV=setInterval(()=>vib([40,20,40]),100);tzLoop()}
 function tzStop(){if(!tOn)return;tOn=0;clearInterval(tI);clearInterval(tV);try{tN.stop();tO.stop()}catch(e){}vstop();tzDraw()}
 const tb=$('#tzb');tb.addEventListener('pointerdown',tzStart);['pointerup','pointerleave','pointercancel'].forEach(n=>tb.addEventListener(n,tzStop));tb.oncontextmenu=e=>e.preventDefault();tzDraw();
@@ -166,14 +168,14 @@ function clipOff(){if(!cOn)return;cOn=0;clearInterval(cI);clearInterval(cV);vsto
 const t=AC.currentTime;cG.gain.cancelScheduledValues(t);cG.gain.setValueAtTime(cG.gain.value,t);cG.gain.linearRampToValueAtTime(0,t+.2);[cO1,cO2,cN].forEach(o=>o.stop(t+.25))}
 
 /* 3 whip */
-let wP=[0,0,0],wL=0;
-function crack(){au();const t=AC.currentTime;burst(t,.1,1.5,'highpass',1800,.7);burst(t,.04,1,'bandpass',5000,2);tone('sine',90,t,.25,1.3,28);vib([30,20,120]);
+let wP=[0,0,0],wL=0,wOn=0;
+function crack(){au();const t=AC.currentTime;burst(t,.12,4,'highpass',1500,.7,LB);burst(t,.05,3,'bandpass',4500,2,LB);burst(t,.15,3,'lowpass',250,1,LB);tone('sine',90,t,.3,3.5,25,LB);tone('square',2400,t,.02,.8,300,LB);vib([30,20,120]);
 const w=$('#wr');w.style.opacity=.9;w.style.transform='scale(1.4)';setTimeout(()=>{w.style.opacity=0;w.style.transform='scale(.3)'},130);flash('rgba(255,255,255,.35)',60)}
 function wMotion(e){const a=e.accelerationIncludingGravity||e.acceleration;if(!a)return;const x=a.x||0,y=a.y||0,z=a.z||0,d=Math.hypot(x-wP[0],y-wP[1],z-wP[2]);wP=[x,y,z];const n=Date.now();
 if(d>30&&n-wL>600&&$('#t2').classList.contains('on')){wL=n;crack()}}
 async function wEnable(){try{if(window.DeviceMotionEvent&&DeviceMotionEvent.requestPermission&&await DeviceMotionEvent.requestPermission()!=='granted'){$('#wst').textContent='تم رفض إذن الحساس، استخدم الزر.';return}
-removeEventListener('devicemotion',wMotion);addEventListener('devicemotion',wMotion);$('#wst').textContent='✅ الحساس مفعّل: لوّح بالهاتف بقوة في الهواء.'}catch(e){$('#wst').textContent='الحساس غير متاح، استخدم الزر.'}}
-$('#wbtn').onclick=crack;$('#wen').onclick=wEnable;if(!(window.DeviceMotionEvent&&DeviceMotionEvent.requestPermission))wEnable();
+removeEventListener('devicemotion',wMotion);addEventListener('devicemotion',wMotion);wOn=1;$('#wst').textContent='✅ الحساس مفعّل: لوّح بالهاتف بقوة في الهواء.'}catch(e){$('#wst').textContent='الحساس غير متاح، استخدم الزر.'}}
+$('#wbtn').onclick=()=>{if(!wOn)wEnable();crack()};$('#wen').onclick=wEnable;if(!(window.DeviceMotionEvent&&DeviceMotionEvent.requestPermission))wEnable();
 
 /* 4 lie detector */
 const fz=$('#fz');let lT,lH,lB=0,lS;
@@ -214,7 +216,7 @@ const t=AC.currentTime;burst(t,.7,1.6,'highpass',1500,.5);burst(t,.25,1.4,'bandp
 vib([200,50,150,50,100]);flash('#fff',80)}
 
 /* content */
-const FQ=[['هل المقالب آمنة على الهاتف؟','نعم، كل المؤثرات صوت واهتزاز ورسوم داخل المتصفح ولا تضر شاشة الهاتف أو بياناته. الشاشة المكسورة صورة وهمية تُزال بنقرتين في الزاوية العلوية اليمنى.'],['لماذا لا يهتز هاتفي؟','واجهة الاهتزاز غير مدعومة في Safari على iPhone، وقد يكون وضع الصامت أو توفير الطاقة مفعّلاً. جرّب متصفح Chrome على أندرويد.'],['لماذا لا يعمل السوط الحركي؟','فعّل الحساس من الزر، ووافق على الإذن في iPhone، وتأكد أن الصفحة تعمل عبر HTTPS. يمكنك دائماً الضغط على زر الطرقعة.'],['هل يُحفظ أي شيء عني؟','لا. كل شيء يعمل على جهازك فقط ولا نرسل أي بيانات أو نستخدم الميكروفون أو الكاميرا.']],
+const FQ=[['هل المقالب آمنة على الهاتف؟','نعم، كل المؤثرات صوت واهتزاز ورسوم داخل المتصفح ولا تضر شاشة الهاتف أو بياناته. والشاشة المكسورة مجرد صورة وهمية.'],['لماذا لا يهتز هاتفي؟','واجهة الاهتزاز غير مدعومة في Safari على iPhone، وقد يكون وضع الصامت أو توفير الطاقة مفعّلاً. جرّب متصفح Chrome على أندرويد.'],['لماذا لا يعمل السوط الحركي؟','وافق على إذن الحساس عند ظهوره في iPhone، وتأكد أن الصفحة تعمل عبر HTTPS. يمكنك دائماً الضغط على زر الطرقعة.'],['هل يُحفظ أي شيء عني؟','لا. كل شيء يعمل على جهازك فقط ولا نرسل أي بيانات أو نستخدم الميكروفون أو الكاميرا.']],
 DL=[['سياسة الخصوصية','يعمل التطبيق بالكامل داخل متصفحك (100% من جهة العميل). لا نجمع بيانات شخصية، ولا نرسل قراءات الحساسات أو اللمس إلى أي خادم. قد تعرض الإعلانات من أطراف ثالثة ملفات تعريف ارتباط وفق سياساتها.'],['شروط الاستخدام','التطبيق للترفيه فقط. أنت مسؤول عن اختيار من تمازحه، ويُمنع استخدامه لإيذاء الآخرين أو إخافة الأطفال ومرضى القلب أو في الأماكن العامة وأثناء القيادة. يُقدَّم كما هو دون ضمانات.'],['عن الأداة','صندوق المقالب الذكية (PocketPrank) مجموعة مقالب حسية تُولَّد بالكامل بالجافاسكربت: صوت عبر Web Audio، واهتزاز عبر Vibration API، ورسوم عبر Canvas، دون أي ملفات خارجية.']];
 FQ.forEach(([q,a])=>$('#faq').insertAdjacentHTML('beforeend',`<details class="border-b border-slate-800"><summary>${q}</summary><p class="pb-2">${a}</p></details>`));
 DL.forEach(([t,x],i)=>{document.body.insertAdjacentHTML('beforeend',`<dialog id="d${i}" class="pan p-4"><h2 class="font-black text-lg mb-2">${t}</h2><p class="text-sm leading-7">${x}</p><form method="dialog"><button class="mt-3 px-4 py-2 rounded-lg bg-cyan-700">إغلاق</button></form></dialog>`);
