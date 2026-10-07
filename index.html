@@ -42,6 +42,7 @@ summary{cursor:pointer;font-weight:700;padding:6px 0}
 </head>
 <body class="pb-24">
 <div id="fl"></div>
+<video id="tv" muted playsinline style="position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none"></video>
 <header class="sticky top-0 z-30 flex items-center justify-between px-3 py-2 border-b border-slate-800" style="background:#060910ee;backdrop-filter:blur(8px)">
 <h1 class="font-black text-base select-none">⚡ جيب المقالب | PocketPrank</h1>
 <div class="flex gap-1 text-xs">
@@ -136,7 +137,18 @@ let tapN=0,tapT;$('h1').addEventListener('click',()=>{tapN++;clearTimeout(tapT);
 
 /* tabs */
 $$('.nb').forEach((b,i)=>b.onclick=()=>{stopAll();$$('.tab').forEach((e,j)=>e.classList.toggle('on',i===j));$$('.nb').forEach((e,j)=>e.classList.toggle('on',i===j));scrollTo(0,0)});
-function stopAll(){tzStop();clipOff();ldReset()}
+function stopAll(){tzStop();torchRelease();clipOff();ldReset()}
+
+/* flashlight (torch) - Chrome on Android */
+let tTrack,tStream,tRel,tBusy,tNo=0;
+function torchInit(){if(tTrack&&tTrack.readyState==='live')return Promise.resolve(tTrack);if(tNo||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return Promise.resolve(null);
+return tBusy||(tBusy=(async()=>{try{const st=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:320},height:{ideal:240}}}),tr=st.getVideoTracks()[0],cap=tr.getCapabilities?tr.getCapabilities():{};
+if(!cap.torch){st.getTracks().forEach(x=>x.stop());tNo=1;return null}
+tStream=st;tTrack=tr;const v=$('#tv');v.srcObject=st;v.play().catch(()=>{});return tr}catch(e){return null}finally{tBusy=0}})())}
+async function torch(on){clearTimeout(tRel);try{const tr=await torchInit();if(!tr)return;if(on&&!tOn){torchOff();return}await tr.applyConstraints({advanced:[{torch:on}]})}catch(e){}}
+function torchOff(){if(tTrack&&tTrack.readyState==='live')tTrack.applyConstraints({advanced:[{torch:false}]}).catch(()=>{});clearTimeout(tRel);tRel=setTimeout(torchRelease,10000)}
+function torchRelease(){clearTimeout(tRel);if(tStream)tStream.getTracks().forEach(x=>x.stop());tStream=tTrack=null;$('#tv').srcObject=null}
+document.addEventListener('visibilitychange',()=>{if(document.hidden){tzStop();torchRelease()}});
 
 /* 1 taser */
 const tc=$('#tz'),tx=tc.getContext('2d');let tOn=0,tN,tO,tO2,tL,tG,tI,tV,tSp=[];
@@ -157,7 +169,7 @@ for(let k=0;k<3;k++){const p=m[rnd(2,10)|0];strk(bolt(p[0],p[1],p[0]+rnd(-50,50)
 tx.shadowBlur=0;for(let i=0;i<4;i++)tSp.push({x:rnd(125,195),y:46,vx:rnd(-4,4),vy:rnd(-5,1),l:1})}
 tx.shadowBlur=0;tSp=tSp.filter(p=>p.l>0);tSp.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.35;p.l-=.07;tx.fillStyle=`rgba(255,${180+rnd(0,70)|0},120,${p.l})`;tx.fillRect(p.x,p.y,2,2)})}
 function tzLoop(){tzDraw();if(tOn||tSp.length)requestAnimationFrame(tzLoop)}
-function tzStart(e){e.preventDefault();if(tOn)return;au();tOn=1;const t=AC.currentTime;
+function tzStart(e){e.preventDefault();if(tOn)return;au();tOn=1;torch(true);const t=AC.currentTime;
 burst(t,.02,.9,'bandpass',3000,3,LB);tone('sine',55,t,.12,.9,30,LB);
 tO=AC.createOscillator();tO.type='sine';tO.frequency.value=2600;tO2=AC.createOscillator();tO2.type='sine';tO2.frequency.value=5200;tN=AC.createOscillator();tN.type='sawtooth';tN.frequency.value=100;
 const am=AC.createGain(),ld=AC.createGain(),hg=AC.createGain(),lp=AC.createBiquadFilter();tL=AC.createOscillator();tL.type='square';tL.frequency.value=24;
@@ -170,7 +182,7 @@ if(b<.12)tone('sawtooth',rnd(900,1800),n,.03,.3,rnd(300,600),LB);
 tO.frequency.setValueAtTime(rnd(2400,2900),n);tL.frequency.setValueAtTime(rnd(18,32),n);
 if(b>.5)flash(b>.8?'#fff':'#38bdf8',30);tI=setTimeout(crk,rnd(8,45))};crk();
 const vp=()=>vib(Array.from({length:30},()=>[140,10]).flat());vp();tV=setInterval(vp,2500);$('#app').classList.add('shake','hard');tzLoop()}
-function tzStop(){if(!tOn)return;tOn=0;clearTimeout(tI);clearInterval(tV);try{tN.stop();tO.stop();tO2.stop();tL.stop()}catch(e){}vstop();$('#app').classList.remove('shake','hard');tzLoop()}
+function tzStop(){if(!tOn)return;tOn=0;torchOff();clearTimeout(tI);clearInterval(tV);try{tN.stop();tO.stop();tO2.stop();tL.stop()}catch(e){}vstop();$('#app').classList.remove('shake','hard');tzLoop()}
 const tb=$('#tzb');tb.addEventListener('pointerdown',tzStart);['pointerup','pointerleave','pointercancel'].forEach(n=>tb.addEventListener(n,tzStop));tb.oncontextmenu=e=>e.preventDefault();tzDraw();
 
 /* 2 clipper */
