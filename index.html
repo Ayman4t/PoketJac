@@ -32,10 +32,11 @@ button{touch-action:manipulation;-webkit-user-select:none;user-select:none}
 .alarm{animation:al .25s steps(2) infinite;border-color:var(--rd)!important}.okk{box-shadow:0 0 30px var(--gr);border-color:var(--gr)!important}
 .mb.on{background:var(--cy);color:#042f3a}
 .tip{display:none}body.tips .tip{display:block}
-#fl{position:fixed;inset:0;z-index:80;pointer-events:none;opacity:0}
+#fl{position:fixed;top:0;left:0;right:0;bottom:0;z-index:80;pointer-events:none;opacity:0}
 dialog{color:#e5e7eb;max-width:90vw}dialog::backdrop{background:#000a}
 summary{cursor:pointer;font-weight:700;padding:6px 0}
 @keyframes shk2{0%{transform:translate(4px,3px)}25%{transform:translate(-4px,2px)}50%{transform:translate(3px,-4px)}75%{transform:translate(-3px,-3px)}}.shake.hard{animation:shk2 .05s linear infinite}
+.run #mb{animation:mv .03s linear infinite alternate}@keyframes mv{to{transform:translateX(-4px)}}#sk{transition:transform .15s}.run #sk{transform:translateY(-17px);fill:#22c55e}
 @media(prefers-reduced-motion:reduce){.shake,.shake.hard{animation:none}}
 </style>
 </head>
@@ -58,18 +59,28 @@ summary{cursor:pointer;font-weight:700;padding:6px 0}
 
 </section>
 
-<section class="tab pan p-3 text-center space-y-4" id="t1">
+<section class="tab pan p-3 text-center space-y-3" id="t1">
 <h2 class="font-black text-lg">✂️ ماكينة الحلاقة</h2>
-<div id="cl" class="mx-auto" style="width:150px">
-<div style="height:150px;background:linear-gradient(90deg,#334155,#e2e8f0 45%,#475569);border-radius:40px 40px 14px 14px;position:relative"><div style="position:absolute;top:18px;left:50%;margin-left:-6px;width:12px;height:50px;border-radius:6px;background:#0f172a"></div><div style="position:absolute;bottom:14px;width:100%;font-weight:900;color:#0f172a;font-size:13px">PRO CUT</div></div>
-<div dir="ltr" style="overflow:hidden;background:#475569"><div class="teeth"></div></div></div>
+<div id="cl" class="relative mx-auto" style="width:200px;height:330px;touch-action:none">
+<svg viewBox="0 0 200 330" width="200" height="330"><defs>
+<linearGradient id="gb" x1="0" x2="1"><stop offset="0" stop-color="#111827"/><stop offset=".3" stop-color="#4b5563"/><stop offset=".55" stop-color="#1f2937"/><stop offset="1" stop-color="#030712"/></linearGradient>
+<linearGradient id="gc" x1="0" x2="1"><stop offset="0" stop-color="#64748b"/><stop offset=".4" stop-color="#f1f5f9"/><stop offset="1" stop-color="#475569"/></linearGradient></defs>
+<rect x="52" y="110" width="96" height="212" rx="34" fill="url(#gb)"/>
+<path d="M66 276H134M66 288H134M66 300H134" stroke="#ffffff18" stroke-width="2"/>
+<rect x="52" y="150" width="96" height="12" fill="#dc2626"/>
+<text x="100" y="186" text-anchor="middle" font-size="14" font-weight="900" fill="#e5e7eb">PRO CUT</text>
+<text x="100" y="200" text-anchor="middle" font-size="7" fill="#9ca3af">PROFESSIONAL CLIPPER</text>
+<rect x="90" y="216" width="20" height="44" rx="9" fill="#030712" stroke="#374151"/><rect id="sk" x="93" y="238" width="14" height="19" rx="6" fill="#9ca3af"/>
+<path d="M44 114L156 114L150 68L50 68Z" fill="url(#gc)"/><rect x="40" y="108" width="120" height="9" rx="3" fill="#94a3b8"/>
+<rect x="46" y="62" width="108" height="9" fill="#cbd5e1"/><g id="bl" fill="url(#gc)"></g><g id="mb" fill="#6b7280"></g>
+</svg><canvas id="hc" width="200" height="330" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></div>
 <button id="clsw" dir="ltr" class="relative mx-auto block rounded-full bg-slate-700 border border-slate-500" style="width:96px;height:48px" aria-label="مفتاح التشغيل"><i id="kn" style="position:absolute;top:4px;left:4px;width:38px;height:38px;border-radius:50%;background:#e2e8f0;transition:left .15s"></i></button>
-<p class="tip text-xs text-slate-400">حرّك المفتاح للتشغيل، ثم قرّبه من رأس صديقك.</p>
+<p class="tip text-xs text-slate-400">شغّل المفتاح، ثم المس الماكينة بإصبعك لتقليد القص مع تساقط الشعر.</p>
 </section>
 
 <section class="tab pan p-3 text-center space-y-3" id="t2">
 <h2 class="font-black text-lg">💥 السوط الحركي</h2>
-<div class="relative mx-auto" style="width:200px;height:200px"><div id="wr" style="position:absolute;inset:0;border-radius:50%;border:6px solid #fff;opacity:0;transform:scale(.3);transition:all .12s"></div><div class="absolute inset-0 flex items-center justify-center text-7xl">💥</div></div>
+<div class="relative mx-auto" style="width:200px;height:200px"><div id="wr" style="position:absolute;top:0;left:0;right:0;bottom:0;border-radius:50%;border:6px solid #fff;opacity:0;transform:scale(.3);transition:all .12s"></div><div class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-7xl">💥</div></div>
 <button id="wbtn" class="big bg-amber-600 active:bg-amber-500">اضغط للطرقعة</button>
 <button id="wen" class="tip text-sm underline text-cyan-300 mx-auto">تفعيل حساس الحركة</button>
 <p id="wst" class="tip text-xs text-slate-400">لوّح بالهاتف بقوة في الهواء (تسارع أكبر من 30 م/ث²) أو اضغط الزر.</p>
@@ -104,8 +115,8 @@ summary{cursor:pointer;font-weight:700;padding:6px 0}
 <button class="nb on"><b>⚡</b>الصاعق</button><button class="nb"><b>✂️</b>الحلاقة</button><button class="nb"><b>💥</b>السوط</button><button class="nb"><b>🎯</b>كشف الكذب</button><button class="nb"><b>📱</b>كسر الشاشة</button>
 </nav>
 
-<div id="trap" style="display:none;position:fixed;inset:0;z-index:60;background:radial-gradient(circle at 30% 20%,#1e3a8a,#020617);align-items:center;justify-content:center;flex-direction:column;touch-action:none"><div id="clk" class="text-7xl font-black"></div><p id="dt" class="mt-2 text-slate-300"></p><p class="absolute bottom-10 text-slate-400">اسحب للأعلى للفتح</p></div>
-<canvas id="gl" style="display:none;position:fixed;inset:0;width:100%;height:100%;z-index:70;touch-action:none"></canvas>
+<div id="trap" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:60;background:radial-gradient(circle at 30% 20%,#1e3a8a,#020617);align-items:center;justify-content:center;flex-direction:column;touch-action:none"><div id="clk" class="text-7xl font-black"></div><p id="dt" class="mt-2 text-slate-300"></p><p class="absolute bottom-10 text-slate-400">اسحب للأعلى للفتح</p></div>
+<canvas id="gl" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;z-index:70;touch-action:none"></canvas>
 
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],rnd=(a,b)=>a+Math.random()*(b-a);
@@ -128,7 +139,7 @@ $$('.nb').forEach((b,i)=>b.onclick=()=>{stopAll();$$('.tab').forEach((e,j)=>e.cl
 function stopAll(){tzStop();clipOff();ldReset()}
 
 /* 1 taser */
-const tc=$('#tz'),tx=tc.getContext('2d');let tOn=0,tN,tO,tO2,tG,tI,tV,tSp=[];
+const tc=$('#tz'),tx=tc.getContext('2d');let tOn=0,tN,tO,tO2,tL,tG,tI,tV,tSp=[];
 const bolt=(x1,y1,x2,y2,amp,n)=>{const q=[[x1,y1]];for(let i=1;i<n;i++){const f=i/n;q.push([x1+(x2-x1)*f+rnd(-amp,amp)*.5,y1+(y2-y1)*f+rnd(-amp,amp)])}q.push([x2,y2]);return q};
 const strk=(q,c,w,b)=>{tx.beginPath();q.forEach((p,i)=>i?tx.lineTo(p[0],p[1]):tx.moveTo(p[0],p[1]));tx.strokeStyle=c;tx.lineWidth=w;tx.shadowColor='#38bdf8';tx.shadowBlur=b;tx.stroke()};
 function tzDraw(){tx.clearRect(0,0,320,300);tx.shadowBlur=0;
@@ -147,32 +158,47 @@ tx.shadowBlur=0;for(let i=0;i<4;i++)tSp.push({x:rnd(125,195),y:46,vx:rnd(-4,4),v
 tx.shadowBlur=0;tSp=tSp.filter(p=>p.l>0);tSp.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.35;p.l-=.07;tx.fillStyle=`rgba(255,${180+rnd(0,70)|0},120,${p.l})`;tx.fillRect(p.x,p.y,2,2)})}
 function tzLoop(){tzDraw();if(tOn||tSp.length)requestAnimationFrame(tzLoop)}
 function tzStart(e){e.preventDefault();if(tOn)return;au();tOn=1;const t=AC.currentTime;
-burst(t,.03,5,'bandpass',3200,3,LB);tone('sine',60,t,.15,2,30,LB);
-tG=AC.createGain();tG.gain.value=3;const ws=AC.createWaveShaper(),cv=new Float32Array(256);for(let i=0;i<256;i++)cv[i]=Math.tanh((i/128-1)*6);ws.curve=cv;tG.connect(ws);ws.connect(LB);
-tO=AC.createOscillator();tO.type='sawtooth';tO.frequency.value=150;tO2=AC.createOscillator();tO2.type='square';tO2.frequency.value=3300;
-const ga=AC.createGain(),gb=AC.createGain(),bp=AC.createBiquadFilter();ga.gain.value=.6;gb.gain.value=.35;bp.type='bandpass';bp.frequency.value=4000;bp.Q.value=.5;tN=noise(1);
-tO.connect(ga);ga.connect(tG);tO2.connect(gb);gb.connect(tG);tN.connect(bp);bp.connect(tG);[tO,tO2,tN].forEach(o=>o.start());
-const pulse=()=>{const n=AC.currentTime;tO2.frequency.setValueAtTime(rnd(2800,4300),n);tO.frequency.setValueAtTime(rnd(120,190),n);tG.gain.setValueAtTime(Math.random()>.25?rnd(2.5,6):.3,n);
-burst(n,.012,6,'highpass',2500,.7,LB);tone('sawtooth',rnd(1800,3600),n,.02,2,rnd(500,900),LB);if(Math.random()<.3)burst(n,.05,8,'bandpass',rnd(1500,4200),2,LB);flash(Math.random()>.5?'#fff':'#38bdf8',35)};
-pulse();tI=setInterval(pulse,rnd(26,38)|0);
+burst(t,.02,.9,'bandpass',3000,3,LB);tone('sine',55,t,.12,.9,30,LB);
+tO=AC.createOscillator();tO.type='sine';tO.frequency.value=2600;tO2=AC.createOscillator();tO2.type='sine';tO2.frequency.value=5200;tN=AC.createOscillator();tN.type='sawtooth';tN.frequency.value=100;
+const am=AC.createGain(),ld=AC.createGain(),hg=AC.createGain(),lp=AC.createBiquadFilter();tL=AC.createOscillator();tL.type='square';tL.frequency.value=24;
+am.gain.value=.12;ld.gain.value=.1;hg.gain.value=.05;lp.type='lowpass';lp.frequency.value=500;
+tL.connect(ld);ld.connect(am.gain);tO.connect(am);tO2.connect(am);tN.connect(lp);lp.connect(hg);tG=AC.createGain();tG.gain.value=.9;am.connect(tG);hg.connect(tG);tG.connect(LB);[tO,tO2,tN,tL].forEach(o=>o.start());
+const crk=()=>{if(!tOn)return;const n=AC.currentTime,b=Math.random();
+burst(n,rnd(.006,.016),rnd(.35,.8),'highpass',rnd(2500,4500),.7,LB);
+if(b<.35)burst(n,rnd(.02,.05),rnd(.25,.5),'bandpass',rnd(1200,3000),1.5,LB);
+if(b<.12)tone('sawtooth',rnd(900,1800),n,.03,.3,rnd(300,600),LB);
+tO.frequency.setValueAtTime(rnd(2400,2900),n);tL.frequency.setValueAtTime(rnd(18,32),n);
+if(b>.5)flash(b>.8?'#fff':'#38bdf8',30);tI=setTimeout(crk,rnd(8,45))};crk();
 const vp=()=>vib(Array.from({length:30},()=>[140,10]).flat());vp();tV=setInterval(vp,2500);$('#app').classList.add('shake','hard');tzLoop()}
-function tzStop(){if(!tOn)return;tOn=0;clearInterval(tI);clearInterval(tV);try{tN.stop();tO.stop();tO2.stop()}catch(e){}vstop();$('#app').classList.remove('shake','hard');tzLoop()}
+function tzStop(){if(!tOn)return;tOn=0;clearTimeout(tI);clearInterval(tV);try{tN.stop();tO.stop();tO2.stop();tL.stop()}catch(e){}vstop();$('#app').classList.remove('shake','hard');tzLoop()}
 const tb=$('#tzb');tb.addEventListener('pointerdown',tzStart);['pointerup','pointerleave','pointercancel'].forEach(n=>tb.addEventListener(n,tzStop));tb.oncontextmenu=e=>e.preventDefault();tzDraw();
 
 /* 2 clipper */
-let cOn=0,cN,cO1,cO2,cG,cI,cV;$('.teeth').innerHTML='<i></i>'.repeat(14);
-$('#clsw').onclick=()=>{au();const t=AC.currentTime;burst(t,.04,.9,'bandpass',2500,4);
-if(cOn){tone('square',500,t,.03,.18);tone('square',300,t+.06,.04,.14);clipOff();return}
-tone('square',1000,t,.03,.18);tone('square',1500,t+.06,.04,.14);cOn=1;
-$('#clsw').classList.add('on2');$('#cl').classList.add('run');$('#app').classList.add('shake');
-cG=AC.createGain();cG.gain.setValueAtTime(0,t);cG.gain.linearRampToValueAtTime(.4,t+.3);
-cO1=AC.createOscillator();cO1.type='sawtooth';cO1.frequency.value=130;cO2=AC.createOscillator();cO2.type='sine';cO2.frequency.value=55;
-const sg=AC.createGain();sg.gain.value=.7,ng=AC.createGain(),f=AC.createBiquadFilter();ng.gain.value=.05;f.type='bandpass';f.frequency.value=3500;cN=noise(1);
-cO1.connect(cG);cO2.connect(sg);sg.connect(cG);cN.connect(f);f.connect(ng);ng.connect(cG);cG.connect(MG);[cO1,cO2,cN].forEach(o=>o.start());
-cI=setInterval(()=>{const n=AC.currentTime;cO1.frequency.setValueAtTime(130+rnd(-4,4),n);ng.gain.setValueAtTime(rnd(.03,.09),n)},40);
-vib(80);cV=setInterval(()=>vib(80),90)};
-function clipOff(){if(!cOn)return;cOn=0;clearInterval(cI);clearInterval(cV);vstop();$('#clsw').classList.remove('on2');$('#cl').classList.remove('run');$('#app').classList.remove('shake');
-const t=AC.currentTime;cG.gain.cancelScheduledValues(t);cG.gain.setValueAtTime(cG.gain.value,t);cG.gain.linearRampToValueAtTime(0,t+.2);[cO1,cO2,cN].forEach(o=>o.stop(t+.25))}
+let cOn=0,cut=0,cO1,cO2,cL,cN,cG,cI,cV,cVp,hair=[],hRun=0;
+{let a='',b='';for(let i=0;i<18;i++){const x=48+i*6;a+=`<path d="M${x} 66L${x+1} 30L${x+4} 30L${x+5} 66Z" stroke="#0f172a" stroke-width=".4"/>`;b+=`<path d="M${x+3} 66L${x+3.6} 38L${x+5.4} 38L${x+6} 66Z"/>`}$('#bl').innerHTML=a;$('#mb').innerHTML=b}
+const hcx=$('#hc').getContext('2d');
+function hairLoop(){hcx.clearRect(0,0,200,330);hair.forEach(h=>{h.x+=h.vx;h.y+=h.vy;h.vy+=.12;h.a+=h.va;hcx.save();hcx.translate(h.x,h.y);hcx.rotate(h.a);hcx.strokeStyle=h.c;hcx.lineWidth=1.2;hcx.beginPath();hcx.moveTo(-h.l,0);hcx.quadraticCurveTo(0,h.l*.6,h.l,0);hcx.stroke();hcx.restore()});hair=hair.filter(h=>h.y<340);if(cOn||hair.length)requestAnimationFrame(hairLoop);else hRun=0}
+function pw(){const n=40,re=new Float32Array(n),im=new Float32Array(n);for(let i=1;i<n;i++)im[i]=Math.pow(i,-.75)*(i%2?1:.7);return AC.createPeriodicWave(re,im)}
+$('#clsw').onclick=()=>{au();const t=AC.currentTime;
+if(cOn){burst(t,.04,.8,'bandpass',2200,4);tone('square',420,t,.03,.12);clipOff();return}
+burst(t,.04,1.2,'bandpass',2600,4);tone('square',900,t,.03,.15);tone('square',1300,t+.05,.04,.12);
+cOn=1;$('#cl').classList.add('run');$('#clsw').classList.add('on2');$('#app').classList.add('shake');
+cG=AC.createGain();cG.gain.setValueAtTime(0,t);cG.gain.linearRampToValueAtTime(.55,t+.25);
+const wv=pw(),ga=AC.createGain(),gb=AC.createGain(),body=AC.createBiquadFilter(),lp=AC.createBiquadFilter();ga.gain.value=.5;gb.gain.value=.35;
+body.type='peaking';body.frequency.value=320;body.gain.value=9;body.Q.value=1;lp.type='lowpass';lp.frequency.value=5500;
+cO1=AC.createOscillator();cO1.setPeriodicWave(wv);cO2=AC.createOscillator();cO2.setPeriodicWave(wv);
+cL=AC.createOscillator();cL.type='square';
+[[cO1,35],[cO2,36],[cL,35]].forEach(([o,f])=>{o.frequency.setValueAtTime(f,t);o.frequency.exponentialRampToValueAtTime(f*3.43,t+.4)});
+const bp=AC.createBiquadFilter(),ng=AC.createGain(),ld=AC.createGain();bp.type='bandpass';bp.frequency.value=3200;bp.Q.value=1.2;ng.gain.value=.08;ld.gain.value=.07;cN=noise(1);
+cL.connect(ld);ld.connect(ng.gain);cO1.connect(ga);cO2.connect(gb);ga.connect(body);gb.connect(body);cN.connect(bp);bp.connect(ng);ng.connect(body);body.connect(lp);lp.connect(cG);cG.connect(MG);
+[cO1,cO2,cL,cN].forEach(o=>o.start());
+cI=setInterval(()=>{const n=AC.currentTime;if(n<t+.5)return;const f=(cut?106:120)+rnd(-1.2,1.2);[[cO1,f],[cO2,f*1.02],[cL,f]].forEach(([o,v])=>o.frequency.setTargetAtTime(v,n,.05));
+if(cut){burst(n,.02,.35,'bandpass',rnd(2200,5000),2);for(let i=0;i<2;i++)hair.push({x:rnd(55,145),y:34,vx:rnd(-1.2,1.2),vy:rnd(-1,.5),a:rnd(0,6),va:rnd(-.2,.2),l:rnd(3,8),c:['#2b1a10','#3b2415','#111','#5a3a22'][rnd(0,4)|0]});if(!hRun){hRun=1;hairLoop()}}},60);
+cVp=()=>vib(Array.from({length:40},()=>cut?[110,6]:[70,12]).flat());cVp();cV=setInterval(cVp,2000)};
+{const cl=$('#cl');cl.addEventListener('pointerdown',e=>{e.preventDefault();if(!cOn)return;cut=1;cVp()});['pointerup','pointercancel','pointerleave'].forEach(n=>cl.addEventListener(n,()=>{if(cut){cut=0;if(cOn)cVp()}}))}
+function clipOff(){if(!cOn)return;cOn=0;cut=0;clearInterval(cI);clearInterval(cV);vstop();$('#clsw').classList.remove('on2');$('#cl').classList.remove('run');$('#app').classList.remove('shake');
+const t=AC.currentTime;cG.gain.cancelScheduledValues(t);cG.gain.setValueAtTime(cG.gain.value,t);cG.gain.linearRampToValueAtTime(0,t+.55);
+[cO1,cO2,cL].forEach(o=>{o.frequency.cancelScheduledValues(t);o.frequency.setValueAtTime(Math.max(o.frequency.value,40),t);o.frequency.exponentialRampToValueAtTime(40,t+.5)});[cO1,cO2,cL,cN].forEach(o=>o.stop(t+.6))}
 
 /* 3 whip */
 let wP=[0,0,0],wL=0,wOn=0;
@@ -209,9 +235,18 @@ function corner(e,cb){if(e.clientX>innerWidth-90&&e.clientY<90){const n=Date.now
 trap.addEventListener('pointerdown',e=>{e.preventDefault();if(corner(e,()=>trap.style.display='none'))return;au();shatter(e.clientX,e.clientY)});
 gc.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();corner(e,()=>{gc.style.display='none'})});
 gc.oncontextmenu=e=>e.preventDefault();
+function glassSound(){const t=AC.currentTime;burst(t,.05,8,'highpass',3000,.5,LB);tone('triangle',7000,t,.05,3,700,LB);
+burst(t,.9,4,'highpass',1500,.5,LB);burst(t+.02,.3,5,'bandpass',1000,.7,LB);tone('sine',70,t,.5,3.5,28,LB);
+[1180,2930,4170,6200,8300].forEach((f,i)=>tone('sine',f,t+.01,1.5-i*.2,.35/(i+1),0,LB));
+for(let i=0;i<40;i++){const q=t+rnd(.04,1.1);burst(q,.04,rnd(.6,2),'bandpass',rnd(2500,9000),4,LB);if(i%2)tone('triangle',rnd(3000,10000),q,.14,.3,0,LB)}
+vib([250,40,200,40,150,40,100]);flash('#fff',90)}
+function shatter(x,y){if(gc.style.display==='block')return;au();try{glassSound()}catch(e){}try{shatterReal(x,y)}catch(e){shatterLite(x,y)}}
+function shatterLite(x,y){const w=innerWidth,h=innerHeight,c=g2;gc.width=w;gc.height=h;gc.style.display='block';trap.style.display='none';c.setTransform(1,0,0,1,0,0);c.fillStyle='#050816';c.fillRect(0,0,w,h);c.strokeStyle='rgba(255,255,255,.8)';c.lineWidth=1.5;
+for(let i=0;i<14;i++){const a=i/14*6.28+rnd(-.2,.2);c.beginPath();c.moveTo(x,y);c.lineTo(x+Math.cos(a)*w*2,y+Math.sin(a)*w*2);c.stroke()}
+for(let k=1;k<7;k++){c.beginPath();for(let i=0;i<=14;i++){const a=i/14*6.28,d=k*k*14*rnd(.9,1.1),px=x+Math.cos(a)*d,py=y+Math.sin(a)*d;i?c.lineTo(px,py):c.moveTo(px,py)}c.stroke()}}
 function clock(){const d=new Date();$('#clk').textContent=d.toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'});$('#dt').textContent=d.toLocaleDateString('ar-EG',{weekday:'long',day:'numeric',month:'long'})}
 function wall(w,h,dp){const c=document.createElement('canvas');c.width=w*dp;c.height=h*dp;const x=c.getContext('2d');x.scale(dp,dp);const g=x.createRadialGradient(w*.3,h*.2,0,w*.3,h*.2,Math.hypot(w*.7,h*.8));g.addColorStop(0,'#1e3a8a');g.addColorStop(1,'#020617');x.fillStyle=g;x.fillRect(0,0,w,h);x.textAlign='center';x.fillStyle='#fff';x.font='900 '+Math.min(w*.2,84)+'px Cairo,sans-serif';x.fillText($('#clk').textContent,w/2,h/2-10);x.font='400 18px Cairo,sans-serif';x.fillStyle='#cbd5e1';x.fillText($('#dt').textContent,w/2,h/2+24);x.fillStyle='#94a3b8';x.fillText('اسحب للأعلى للفتح',w/2,h-40);return c}
-function shatter(x,y){au();clock();const dp=devicePixelRatio||1,w=innerWidth,h=innerHeight,bg=wall(w,h,dp),sc=document.createElement('canvas');sc.width=w*dp;sc.height=h*dp;const c=sc.getContext('2d');c.setTransform(dp,0,0,dp,0,0);c.drawImage(bg,0,0,w,h);
+function shatterReal(x,y){clock();const dp=Math.min(devicePixelRatio||1,2),w=innerWidth,h=innerHeight,bg=wall(w,h,dp),sc=document.createElement('canvas');sc.width=w*dp;sc.height=h*dp;const c=sc.getContext('2d');c.setTransform(dp,0,0,dp,0,0);c.drawImage(bg,0,0,w,h);
 const N=rnd(12,17)|0,R=Math.hypot(w,h)*1.15,rs=[0];let r=9;while(r<R){rs.push(r);r=r*rnd(1.4,1.75)+rnd(5,16)}rs.push(R);const K=rs.length-1,A0=rnd(0,6.28);
 const P=Array.from({length:N},(_,i)=>{const a=A0+i/N*6.2832+rnd(-.17,.17);return rs.map(q=>{const j=q?rnd(-.05,.05):0,s=q?rnd(.92,1.08):1;return[x+Math.cos(a+j)*q*s,y+Math.sin(a+j)*q*s]})});
 /* refracted shards: each piece shows the screen slightly shifted and tilted */
@@ -231,18 +266,14 @@ for(let i=0;i<60;i++){const a=rnd(0,6.28),d=rnd(2,55);c.fillStyle=`rgba(255,255,
 /* cracks race outward from the impact point */
 gc.width=w*dp;gc.height=h*dp;gc.style.display='block';trap.style.display='none';
 const t0=performance.now();(function f(n){const p=Math.min(1,(n-t0)/300),m=R*(1-Math.pow(1-p,3));g2.setTransform(1,0,0,1,0,0);g2.clearRect(0,0,gc.width,gc.height);g2.drawImage(bg,0,0,gc.width,gc.height);g2.save();g2.beginPath();g2.arc(x*dp,y*dp,m*dp,0,6.3);g2.clip();g2.drawImage(sc,0,0);g2.restore();if(p<1)requestAnimationFrame(f)})(t0);
-const t=AC.currentTime;burst(t,.05,8,'highpass',3000,.5,LB);tone('triangle',7000,t,.05,3,700,LB);
-burst(t,.9,4,'highpass',1500,.5,LB);burst(t+.02,.3,5,'bandpass',1000,.7,LB);tone('sine',70,t,.5,3.5,28,LB);
-[1180,2930,4170,6200,8300].forEach((f,i)=>tone('sine',f,t+.01,1.5-i*.2,.35/(i+1),0,LB));
-for(let i=0;i<40;i++){const q=t+rnd(.04,1.1);burst(q,.04,rnd(.6,2),'bandpass',rnd(2500,9000),4,LB);if(i%2)tone('triangle',rnd(3000,10000),q,.14,.3,0,LB)}
-vib([250,40,200,40,150,40,100]);flash('#fff',90)}
+}
 
 /* content */
 const FQ=[['هل المقالب آمنة على الهاتف؟','نعم، كل المؤثرات صوت واهتزاز ورسوم داخل المتصفح ولا تضر شاشة الهاتف أو بياناته. والشاشة المكسورة مجرد صورة وهمية.'],['لماذا لا يهتز هاتفي؟','واجهة الاهتزاز غير مدعومة في Safari على iPhone، وقد يكون وضع الصامت أو توفير الطاقة مفعّلاً. جرّب متصفح Chrome على أندرويد.'],['لماذا لا يعمل السوط الحركي؟','وافق على إذن الحساس عند ظهوره في iPhone، وتأكد أن الصفحة تعمل عبر HTTPS. يمكنك دائماً الضغط على زر الطرقعة.'],['هل هناك تنبيه للسلامة؟','تتضمن بعض المؤثرات وميضاً ضوئياً سريعاً واهتزازاً قوياً، لذا لا تستخدمها مع من يعانون حساسية الضوء أو أمراض القلب، ولا مع الأطفال الصغار، ولا أثناء القيادة. اكشف المقلب فوراً.'],['هل يُحفظ أي شيء عني؟','لا. كل شيء يعمل على جهازك فقط ولا نرسل أي بيانات أو نستخدم الميكروفون أو الكاميرا.']],
 DL=[['سياسة الخصوصية','يعمل التطبيق بالكامل داخل متصفحك (100% من جهة العميل). لا نجمع بيانات شخصية، ولا نرسل قراءات الحساسات أو اللمس إلى أي خادم. قد تعرض الإعلانات من أطراف ثالثة ملفات تعريف ارتباط وفق سياساتها.'],['شروط الاستخدام','التطبيق للترفيه فقط. أنت مسؤول عن اختيار من تمازحه، ويُمنع استخدامه لإيذاء الآخرين أو إخافة الأطفال ومرضى القلب أو في الأماكن العامة وأثناء القيادة. يُقدَّم كما هو دون ضمانات.'],['عن الأداة','صندوق المقالب الذكية (PocketPrank) مجموعة مقالب حسية تُولَّد بالكامل بالجافاسكربت: صوت عبر Web Audio، واهتزاز عبر Vibration API، ورسوم عبر Canvas، دون أي ملفات خارجية.']];
 FQ.forEach(([q,a])=>$('#faq').insertAdjacentHTML('beforeend',`<details class="border-b border-slate-800"><summary>${q}</summary><p class="pb-2">${a}</p></details>`));
 DL.forEach(([t,x],i)=>{document.body.insertAdjacentHTML('beforeend',`<dialog id="d${i}" class="pan p-4"><h2 class="font-black text-lg mb-2">${t}</h2><p class="text-sm leading-7">${x}</p><form method="dialog"><button class="mt-3 px-4 py-2 rounded-lg bg-cyan-700">إغلاق</button></form></dialog>`);
-const b=document.createElement('button');b.textContent=t;b.className='underline';b.onclick=()=>$('#d'+i).showModal();$('#ft').prepend(b)});
+const b=document.createElement('button');b.textContent=t;b.className='underline';b.onclick=()=>{const d=$('#d'+i);d.showModal?d.showModal():d.setAttribute('open','')};$('#ft').prepend(b)});
 $('#clk').parentElement.style.fontFamily='Cairo,sans-serif';
 
 /* PWA manifest */
