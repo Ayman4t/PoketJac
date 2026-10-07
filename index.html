@@ -35,7 +35,8 @@ button{touch-action:manipulation;-webkit-user-select:none;user-select:none}
 #fl{position:fixed;inset:0;z-index:80;pointer-events:none;opacity:0}
 dialog{color:#e5e7eb;max-width:90vw}dialog::backdrop{background:#000a}
 summary{cursor:pointer;font-weight:700;padding:6px 0}
-@media(prefers-reduced-motion:reduce){.shake{animation:none}}
+@keyframes shk2{0%{transform:translate(4px,3px)}25%{transform:translate(-4px,2px)}50%{transform:translate(3px,-4px)}75%{transform:translate(-3px,-3px)}}.shake.hard{animation:shk2 .05s linear infinite}
+@media(prefers-reduced-motion:reduce){.shake,.shake.hard{animation:none}}
 </style>
 </head>
 <body class="pb-24">
@@ -52,7 +53,7 @@ summary{cursor:pointer;font-weight:700;padding:6px 0}
 
 <section class="tab on pan p-3 text-center space-y-3" id="t0">
 <h2 class="font-black text-lg">⚡ الصاعق الكهربائي</h2>
-<canvas id="tz" width="320" height="230" class="mx-auto w-full max-w-xs"></canvas>
+<canvas id="tz" width="320" height="300" class="mx-auto w-full max-w-xs"></canvas>
 <button id="tzb" class="big" style="background:linear-gradient(#0e7490,#164e63);border:2px solid var(--cy)">اضغط مطولاً للصعق ⚡</button>
 
 </section>
@@ -79,6 +80,7 @@ summary{cursor:pointer;font-weight:700;padding:6px 0}
 <p class="text-sm text-slate-300">ضع الإصبع على البصمة وثبّته 3 ثوانٍ.</p>
 <div id="fz" class="relative mx-auto overflow-hidden rounded-2xl border-2 border-cyan-700" style="width:200px;height:260px;background:#0b1220;touch-action:none"><svg id="fp" viewBox="0 0 100 130" class="w-full h-full" fill="none" stroke="#22d3ee" stroke-width="1.6" opacity=".75"></svg><div id="lz"></div></div>
 <div id="lres" class="pan py-4 font-black text-xl border-2 border-slate-700">جاهز للفحص</div>
+<button id="lbtn" class="big bg-cyan-700 active:bg-cyan-600" style="display:none">🔍 كشف النتيجة</button>
 <p class="tip text-xs text-slate-500">سرّ صاحب الهاتف: النصف العلوي = صادق، النصف السفلي = كاذب.</p>
 </section>
 
@@ -90,20 +92,9 @@ summary{cursor:pointer;font-weight:700;padding:6px 0}
 <p class="tip text-xs text-slate-400">للخروج: انقر مرتين بسرعة على الزاوية العلوية اليمنى من الشاشة. لا تستخدمه مع كبار السن أو من لا يحتمل المفاجآت.</p>
 </section>
 
-<article class="pan p-4 space-y-3 text-sm leading-7 text-slate-300">
-<h2 class="font-black text-lg text-white">دليل المقالب الترفيهية وحساسات الهواتف الذكية</h2>
-<h3 class="font-bold text-cyan-300">كيف يعمل حساس التسارع؟</h3>
-<p>تحتوي الهواتف الحديثة على مقياس تسارع يقيس تغيّر السرعة على ثلاثة محاور بوحدة م/ث². يتيحه المتصفح عبر الحدث <code>devicemotion</code>. عند تلويح الهاتف بقوة يرتفع الفرق بين قراءتين متتاليتين فجأة، فيتعرف التطبيق على الحركة ويشغّل طرقعة السوط. يشترط نظام iOS موافقة صريحة من المستخدم، ويتطلب الحدث اتصالاً آمناً HTTPS.</p>
-<h3 class="font-bold text-cyan-300">واجهة الاهتزاز</h3>
-<p>تسمح <code>navigator.vibrate</code> بتمرير نمط من الأرقام يمثل مدد الاهتزاز والتوقف بالمللي ثانية، مثل [40,20,40]. تعمل على أغلب متصفحات أندرويد، بينما لا يدعمها متصفح Safari على iPhone، لذلك تبقى المؤثرات الصوتية والبصرية فعالة هناك.</p>
-<h3 class="font-bold text-cyan-300">توليد الصوت برمجياً</h3>
-<p>لا يحمّل هذا الموقع أي ملف صوتي. تبني واجهة Web Audio الأصوات لحظياً من موجات مولَّدة (جيبية، منشارية، مربعة) وضوضاء بيضاء تمر عبر مرشحات وتتحكم بها منحنيات ارتفاع وانخفاض. بهذه الطريقة يقل حجم الصفحة ويُفتح الموقع بسرعة.</p>
-<h3 class="font-bold text-cyan-300">الرسم على Canvas</h3>
-<p>يُرسم تشقق الزجاج والصواعق الكهربائية بخوارزميات عشوائية: خطوط شعاعية تنطلق من نقطة اللمس وحلقات متعرجة تربط بينها وتظلل القطع بدرجات داكنة وفاتحة لتبدو كزجاج حقيقي.</p>
-<h3 class="font-bold text-cyan-300">آداب المزاح</h3>
-<p>اختر شخصاً يتقبل المزاح، واكشف المقلب فوراً، ولا تستخدمه في الأماكن العامة أو أثناء القيادة أو مع الأطفال الصغار والمصابين بأمراض القلب. تنبيه: تتضمن بعض المؤثرات وميضاً ضوئياً سريعاً قد لا يناسب من يعانون حساسية الضوء.</p>
+<section class="pan p-4 space-y-3 text-sm leading-7 text-slate-300">
 <div id="faq" class="pt-2 border-t border-slate-700"><h2 class="font-black text-lg text-white mb-1">الأسئلة الشائعة</h2></div>
-</article>
+</section>
 
 <div class="ad-slot">مساحة إعلانية</div>
 <footer class="text-center text-xs text-slate-500 space-x-3 space-x-reverse pb-4" id="ft">© PocketPrank</footer>
@@ -137,19 +128,35 @@ $$('.nb').forEach((b,i)=>b.onclick=()=>{stopAll();$$('.tab').forEach((e,j)=>e.cl
 function stopAll(){tzStop();clipOff();ldReset()}
 
 /* 1 taser */
-const tc=$('#tz'),tx=tc.getContext('2d');let tOn=0,tN,tO,tG,tI,tV;
-function tzDraw(){tx.clearRect(0,0,320,230);const g=tx.createLinearGradient(0,140,0,230);g.addColorStop(0,'#64748b');g.addColorStop(1,'#0f172a');tx.fillStyle=g;tx.beginPath();(tx.roundRect||tx.rect).call(tx,70,140,180,90,16);tx.fill();
-tx.fillStyle='#0f172a';tx.fillRect(140,160,40,10);tx.fillStyle=tOn?'#22d3ee':'#334155';tx.fillRect(146,163,28,4);
-tx.fillStyle='#cbd5e1';tx.fillRect(112,70,12,72);tx.fillRect(196,70,12,72);tx.beginPath();tx.arc(118,68,7,0,7);tx.arc(202,68,7,0,7);tx.fill();
-if(tOn)for(let k=0;k<3;k++){tx.beginPath();tx.moveTo(118,66);for(let s=1;s<=9;s++)tx.lineTo(118+s*84/9,s<9?66+(Math.random()-.5)*(36+k*10):66);const c=k%2?'#a78bfa':'#22d3ee';tx.strokeStyle=k%2?'#ddd6fe':'#a5f3fc';tx.lineWidth=k?1.5:3;tx.shadowColor=c;tx.shadowBlur=14;tx.stroke()}tx.shadowBlur=0}
-function tzLoop(){tzDraw();if(tOn)requestAnimationFrame(tzLoop)}
-function tzStart(e){e.preventDefault();if(tOn)return;au();tOn=1;
-tN=noise(1);const bp=AC.createBiquadFilter();bp.type='bandpass';bp.frequency.value=3000;bp.Q.value=.5;tG=AC.createGain();tG.gain.value=4;
-tO=AC.createOscillator();tO.type='sawtooth';tO.frequency.value=900;const og=AC.createGain();og.gain.value=.6;
-tN.connect(bp);bp.connect(tG);tO.connect(og);og.connect(tG);const ws=AC.createWaveShaper(),cv=new Float32Array(256);for(let i=0;i<256;i++)cv[i]=Math.tanh((i/128-1)*6);ws.curve=cv;tG.connect(ws);ws.connect(LB);tN.start();tO.start();
-tI=setInterval(()=>{const n=AC.currentTime;tO.frequency.setValueAtTime(rnd(300,3800),n);bp.frequency.setValueAtTime(rnd(1500,6500),n);tG.gain.setValueAtTime(Math.random()>.3?rnd(3,9):.4,n);flash(Math.random()>.5?'#fff':'#22d3ee',40)},45);
-vib([40,20,40]);tV=setInterval(()=>vib([40,20,40]),100);tzLoop()}
-function tzStop(){if(!tOn)return;tOn=0;clearInterval(tI);clearInterval(tV);try{tN.stop();tO.stop()}catch(e){}vstop();tzDraw()}
+const tc=$('#tz'),tx=tc.getContext('2d');let tOn=0,tN,tO,tO2,tG,tI,tV,tSp=[];
+const bolt=(x1,y1,x2,y2,amp,n)=>{const q=[[x1,y1]];for(let i=1;i<n;i++){const f=i/n;q.push([x1+(x2-x1)*f+rnd(-amp,amp)*.5,y1+(y2-y1)*f+rnd(-amp,amp)])}q.push([x2,y2]);return q};
+const strk=(q,c,w,b)=>{tx.beginPath();q.forEach((p,i)=>i?tx.lineTo(p[0],p[1]):tx.moveTo(p[0],p[1]));tx.strokeStyle=c;tx.lineWidth=w;tx.shadowColor='#38bdf8';tx.shadowBlur=b;tx.stroke()};
+function tzDraw(){tx.clearRect(0,0,320,300);tx.shadowBlur=0;
+let g=tx.createLinearGradient(100,0,220,0);g.addColorStop(0,'#0b0f17');g.addColorStop(.35,'#3b4558');g.addColorStop(.6,'#1a202c');g.addColorStop(1,'#05070b');
+tx.fillStyle=g;tx.beginPath();(tx.roundRect||tx.rect).call(tx,102,128,116,168,[10,10,28,28]);tx.fill();
+tx.strokeStyle='rgba(255,255,255,.07)';tx.lineWidth=2;for(let y=250;y<292;y+=9){tx.beginPath();tx.moveTo(108,y);tx.lineTo(212,y);tx.stroke()}
+tx.textAlign='center';tx.fillStyle='#e5e7eb';tx.font='700 11px Cairo,sans-serif';tx.fillText('STUN GUN',160,156);tx.fillStyle='#f59e0b';tx.font='700 10px Cairo,sans-serif';tx.fillText('50,000,000 V',160,171);
+tx.fillStyle=tOn?'#ef4444':'#450a0a';tx.shadowColor='#ef4444';tx.shadowBlur=tOn?12:0;tx.beginPath();tx.arc(160,190,5,0,7);tx.fill();tx.shadowBlur=0;
+tx.fillStyle='#111827';tx.fillRect(148,204,24,46);tx.fillStyle=tOn?'#22d3ee':'#64748b';tx.fillRect(151,tOn?207:226,18,20);
+g=tx.createLinearGradient(0,96,0,130);g.addColorStop(0,'#94a3b8');g.addColorStop(.3,'#1f2937');g.addColorStop(1,'#0f172a');tx.fillStyle=g;tx.fillRect(92,96,136,34);tx.fillStyle='#475569';tx.fillRect(88,126,144,8);
+tx.fillStyle='#cbd5e1';tx.fillRect(122,50,10,48);tx.fillRect(188,50,10,48);tx.fillStyle='#f8fafc';tx.beginPath();tx.arc(127,48,7,0,7);tx.fill();tx.beginPath();tx.arc(193,48,7,0,7);tx.fill();
+if(tOn){const o=tx.createRadialGradient(160,52,0,160,52,90);o.addColorStop(0,'rgba(125,211,252,.55)');o.addColorStop(1,'rgba(125,211,252,0)');tx.fillStyle=o;tx.fillRect(40,0,240,140);
+const m=bolt(127,44,193,44,34,12);strk(m,'rgba(56,189,248,.9)',7,22);strk(m,'#fff',2.2,6);
+for(let k=0;k<3;k++){const p=m[rnd(2,10)|0];strk(bolt(p[0],p[1],p[0]+rnd(-50,50),p[1]+rnd(-45,20),14,5),'rgba(196,181,253,.9)',1.6,12)}
+tx.shadowBlur=0;for(let i=0;i<4;i++)tSp.push({x:rnd(125,195),y:46,vx:rnd(-4,4),vy:rnd(-5,1),l:1})}
+tx.shadowBlur=0;tSp=tSp.filter(p=>p.l>0);tSp.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.35;p.l-=.07;tx.fillStyle=`rgba(255,${180+rnd(0,70)|0},120,${p.l})`;tx.fillRect(p.x,p.y,2,2)})}
+function tzLoop(){tzDraw();if(tOn||tSp.length)requestAnimationFrame(tzLoop)}
+function tzStart(e){e.preventDefault();if(tOn)return;au();tOn=1;const t=AC.currentTime;
+burst(t,.03,5,'bandpass',3200,3,LB);tone('sine',60,t,.15,2,30,LB);
+tG=AC.createGain();tG.gain.value=3;const ws=AC.createWaveShaper(),cv=new Float32Array(256);for(let i=0;i<256;i++)cv[i]=Math.tanh((i/128-1)*6);ws.curve=cv;tG.connect(ws);ws.connect(LB);
+tO=AC.createOscillator();tO.type='sawtooth';tO.frequency.value=150;tO2=AC.createOscillator();tO2.type='square';tO2.frequency.value=3300;
+const ga=AC.createGain(),gb=AC.createGain(),bp=AC.createBiquadFilter();ga.gain.value=.6;gb.gain.value=.35;bp.type='bandpass';bp.frequency.value=4000;bp.Q.value=.5;tN=noise(1);
+tO.connect(ga);ga.connect(tG);tO2.connect(gb);gb.connect(tG);tN.connect(bp);bp.connect(tG);[tO,tO2,tN].forEach(o=>o.start());
+const pulse=()=>{const n=AC.currentTime;tO2.frequency.setValueAtTime(rnd(2800,4300),n);tO.frequency.setValueAtTime(rnd(120,190),n);tG.gain.setValueAtTime(Math.random()>.25?rnd(2.5,6):.3,n);
+burst(n,.012,6,'highpass',2500,.7,LB);tone('sawtooth',rnd(1800,3600),n,.02,2,rnd(500,900),LB);if(Math.random()<.3)burst(n,.05,8,'bandpass',rnd(1500,4200),2,LB);flash(Math.random()>.5?'#fff':'#38bdf8',35)};
+pulse();tI=setInterval(pulse,rnd(26,38)|0);
+const vp=()=>vib(Array.from({length:30},()=>[140,10]).flat());vp();tV=setInterval(vp,2500);$('#app').classList.add('shake','hard');tzLoop()}
+function tzStop(){if(!tOn)return;tOn=0;clearInterval(tI);clearInterval(tV);try{tN.stop();tO.stop();tO2.stop()}catch(e){}vstop();$('#app').classList.remove('shake','hard');tzLoop()}
 const tb=$('#tzb');tb.addEventListener('pointerdown',tzStart);['pointerup','pointerleave','pointercancel'].forEach(n=>tb.addEventListener(n,tzStop));tb.oncontextmenu=e=>e.preventDefault();tzDraw();
 
 /* 2 clipper */
@@ -180,13 +187,14 @@ $('#wbtn').onclick=()=>{if(!wOn)wEnable();crack()};$('#wen').onclick=wEnable;if(
 /* 4 lie detector */
 const fz=$('#fz');let lT,lH,lB=0,lS;
 {let s='';for(let i=1;i<=8;i++)s+=`<ellipse cx="50" cy="68" rx="${i*5.6}" ry="${i*7.2}" stroke-dasharray="${rnd(20,70)|0} ${rnd(3,9)|0}"/>`;$('#fp').innerHTML=s}
-function ldReset(){clearTimeout(lT);clearTimeout(lH);if(lB)vstop();lB=0;fz.classList.remove('scan')}
+function ldReset(){clearTimeout(lT);clearTimeout(lH);if(lB)vstop();lB=0;fz.classList.remove('scan');$('#lbtn').style.display='none';const R=$('#lres');R.className='pan py-4 font-black text-xl border-2 border-slate-700';R.style.color='';R.textContent='جاهز للفحص'}
 fz.addEventListener('pointerdown',e=>{e.preventDefault();if(lB)return;au();const r=fz.getBoundingClientRect();lS=e.clientY-r.top<r.height/2;lB=1;fz.classList.add('scan');
-const R=$('#lres');R.className='pan py-4 font-black text-xl border-2 border-slate-700';R.textContent='جارٍ المسح… ثبّت إصبعك';const t0=Date.now();
+const R=$('#lres');R.className='pan py-4 font-black text-xl border-2 border-slate-700';R.textContent='جارٍ المسح… ثبّت إصبعك';R.style.color='';$('#lbtn').style.display='none';const t0=Date.now();
 (function hb(){if(!lB)return;const t=AC.currentTime,p=Math.min(1,(Date.now()-t0)/3000);tone('sine',70,t,.15,.9,40);tone('sine',60,t+.14,.15,.6,35);vib(20+p*90|0);lH=setTimeout(hb,700-p*440)})();
-lT=setTimeout(()=>{clearTimeout(lH);lB=0;fz.classList.remove('scan');vstop();const t=AC.currentTime;
+lT=setTimeout(()=>{clearTimeout(lH);lB=0;fz.classList.remove('scan');vstop();R.textContent='✔ اكتمل التحليل البيومتري';R.style.color='#67e8f9';tone('sine',660,AC.currentTime,.3,.5);vib(60);$('#lbtn').style.display='block'},3000)});
+$('#lbtn').onclick=()=>{au();$('#lbtn').style.display='none';const R=$('#lres'),t=AC.currentTime;
 if(lS){R.textContent='✅ صادق بنسبة 99%!';R.classList.add('okk');R.style.color='#86efac';[880,1175,1760].forEach((f,i)=>tone('sine',f,t+i*.12,.6,.5));vib(80)}
-else{R.textContent='🚨 كااااذب بنسبة 100%!';R.classList.add('alarm');R.style.color='#fecaca';for(let i=0;i<3;i++){tone('sawtooth',140,t+i*.4,.3,.9);tone('square',147,t+i*.4,.3,.5)}flash('rgba(239,68,68,.5)',200);vib([300,100,300,100,500])}},3000)});
+else{R.textContent='🚨 كااااذب بنسبة 100%!';R.classList.add('alarm');R.style.color='#fecaca';for(let i=0;i<3;i++){tone('sawtooth',140,t+i*.4,.3,.9,0,LB);tone('square',147,t+i*.4,.3,.5,0,LB)}flash('rgba(239,68,68,.5)',200);vib([300,100,300,100,500])}};
 ['pointerup','pointerleave','pointercancel'].forEach(n=>fz.addEventListener(n,()=>{if(lB){ldReset();$('#lres').textContent='توقف المسح، أعد المحاولة'}}));
 
 /* 5 broken screen */
@@ -201,22 +209,36 @@ function corner(e,cb){if(e.clientX>innerWidth-90&&e.clientY<90){const n=Date.now
 trap.addEventListener('pointerdown',e=>{e.preventDefault();if(corner(e,()=>trap.style.display='none'))return;au();shatter(e.clientX,e.clientY)});
 gc.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();corner(e,()=>{gc.style.display='none'})});
 gc.oncontextmenu=e=>e.preventDefault();
-function shatter(x,y){au();trap.style.display='none';const dp=devicePixelRatio||1,w=innerWidth,h=innerHeight;gc.width=w*dp;gc.height=h*dp;gc.style.display='block';g2.setTransform(dp,0,0,dp,0,0);
-g2.fillStyle='rgba(6,8,14,.55)';g2.fillRect(0,0,w,h);
-const N=rnd(12,17)|0,R=Math.hypot(w,h)*1.1,rs=[0];let r=10;while(r<R){rs.push(r);r=r*rnd(1.35,1.7)+rnd(6,18)}rs.push(R);
-const A0=rnd(0,6.28),P=Array.from({length:N},(_,i)=>{const a=A0+i/N*6.2832+rnd(-.18,.18);return rs.map(q=>{const j=rnd(-.05,.05),s=q?rnd(.94,1.06):1;return[x+Math.cos(a+j)*q*s,y+Math.sin(a+j)*q*s]})}),K=rs.length-1;
-for(let i=0;i<N;i++){const n=(i+1)%N;for(let k=0;k<K;k++){g2.beginPath();g2.moveTo(...P[i][k]);g2.lineTo(...P[i][k+1]);g2.lineTo(...P[n][k+1]);g2.lineTo(...P[n][k]);g2.closePath();g2.fillStyle=Math.random()<.5?`rgba(255,255,255,${rnd(.02,.1)})`:`rgba(0,0,0,${rnd(.1,.4)})`;g2.fill()}}
-g2.lineCap='round';g2.lineJoin='round';
-const seg=(a,b,wd,al)=>{const dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy)||1,nx=-dy/L,ny=dx/L;g2.beginPath();g2.moveTo(a[0],a[1]);for(let s=1;s<3;s++){const o=rnd(-1,1)*Math.min(8,L*.08);g2.lineTo(a[0]+dx*s/3+nx*o,a[1]+dy*s/3+ny*o)}g2.lineTo(b[0],b[1]);g2.strokeStyle='rgba(0,0,0,.6)';g2.lineWidth=wd+1.5;g2.stroke();g2.strokeStyle=`rgba(255,255,255,${al})`;g2.lineWidth=wd;g2.stroke()};
-for(let i=0;i<N;i++)for(let k=0;k<K;k++){seg(P[i][k],P[i][k+1],Math.max(.6,2.6-k*.3),Math.max(.4,.9-k*.05));if(k>0&&k<K-1&&Math.random()>.12)seg(P[i][k],P[(i+1)%N][k],Math.max(.5,1.6-k*.15),.6)}
-const gr=g2.createRadialGradient(x,y,0,x,y,40);gr.addColorStop(0,'rgba(255,255,255,.95)');gr.addColorStop(.3,'rgba(200,220,255,.4)');gr.addColorStop(1,'rgba(255,255,255,0)');g2.fillStyle=gr;g2.fillRect(x-40,y-40,80,80);
-for(let i=0;i<40;i++){const a=rnd(0,6.28),d=rnd(3,50);g2.fillStyle=`rgba(255,255,255,${rnd(.3,.9)})`;g2.fillRect(x+Math.cos(a)*d,y+Math.sin(a)*d,rnd(1,3),rnd(1,3))}
-const t=AC.currentTime;burst(t,.7,1.6,'highpass',1500,.5);burst(t,.25,1.4,'bandpass',900,.7);tone('sine',70,t,.4,1.3,30);
-[1180,2930,4170,6200].forEach((f,i)=>tone('sine',f,t+.01,1.3-i*.2,.25/(i+1)));for(let i=0;i<18;i++)tone('triangle',rnd(3000,9500),t+rnd(.05,1),.12,.15);
-vib([200,50,150,50,100]);flash('#fff',80)}
+function clock(){const d=new Date();$('#clk').textContent=d.toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'});$('#dt').textContent=d.toLocaleDateString('ar-EG',{weekday:'long',day:'numeric',month:'long'})}
+function wall(w,h,dp){const c=document.createElement('canvas');c.width=w*dp;c.height=h*dp;const x=c.getContext('2d');x.scale(dp,dp);const g=x.createRadialGradient(w*.3,h*.2,0,w*.3,h*.2,Math.hypot(w*.7,h*.8));g.addColorStop(0,'#1e3a8a');g.addColorStop(1,'#020617');x.fillStyle=g;x.fillRect(0,0,w,h);x.textAlign='center';x.fillStyle='#fff';x.font='900 '+Math.min(w*.2,84)+'px Cairo,sans-serif';x.fillText($('#clk').textContent,w/2,h/2-10);x.font='400 18px Cairo,sans-serif';x.fillStyle='#cbd5e1';x.fillText($('#dt').textContent,w/2,h/2+24);x.fillStyle='#94a3b8';x.fillText('اسحب للأعلى للفتح',w/2,h-40);return c}
+function shatter(x,y){au();clock();const dp=devicePixelRatio||1,w=innerWidth,h=innerHeight,bg=wall(w,h,dp),sc=document.createElement('canvas');sc.width=w*dp;sc.height=h*dp;const c=sc.getContext('2d');c.setTransform(dp,0,0,dp,0,0);c.drawImage(bg,0,0,w,h);
+const N=rnd(12,17)|0,R=Math.hypot(w,h)*1.15,rs=[0];let r=9;while(r<R){rs.push(r);r=r*rnd(1.4,1.75)+rnd(5,16)}rs.push(R);const K=rs.length-1,A0=rnd(0,6.28);
+const P=Array.from({length:N},(_,i)=>{const a=A0+i/N*6.2832+rnd(-.17,.17);return rs.map(q=>{const j=q?rnd(-.05,.05):0,s=q?rnd(.92,1.08):1;return[x+Math.cos(a+j)*q*s,y+Math.sin(a+j)*q*s]})});
+/* refracted shards: each piece shows the screen slightly shifted and tilted */
+for(let i=0;i<N;i++){const n=(i+1)%N;for(let k=0;k<K;k++){const q=[P[i][k],P[i][k+1],P[n][k+1],P[n][k]],cx=(q[0][0]+q[1][0]+q[2][0]+q[3][0])/4,cy=(q[0][1]+q[1][1]+q[2][1]+q[3][1])/4,d=Math.max(1,4-k*.4);
+c.save();c.beginPath();q.forEach((p,j)=>j?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]));c.closePath();c.clip();
+c.translate(cx+rnd(-d,d),cy+rnd(-d,d));c.rotate(rnd(-.02,.02));c.translate(-cx,-cy);c.drawImage(bg,0,0,w,h);
+c.fillStyle=Math.random()<.5?`rgba(255,255,255,${rnd(.02,.12)})`:`rgba(0,0,0,${rnd(.08,.35)})`;c.fillRect(-w,-h,3*w,3*h);c.restore()}}
+c.lineCap='round';c.lineJoin='round';
+const seg=(a,b,wd,al)=>{const dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy)||1,nx=-dy/L,ny=dx/L,m=Math.max(2,L/22|0);c.beginPath();c.moveTo(a[0],a[1]);for(let s=1;s<m;s++){const o=rnd(-1,1)*Math.min(5,L*.07);c.lineTo(a[0]+dx*s/m+nx*o,a[1]+dy*s/m+ny*o)}c.lineTo(b[0],b[1]);c.strokeStyle='rgba(0,0,0,.65)';c.lineWidth=wd+1.6;c.stroke();c.strokeStyle=`rgba(255,255,255,${al})`;c.lineWidth=wd;c.stroke()};
+for(let i=0;i<N;i++)for(let k=0;k<K;k++){seg(P[i][k],P[i][k+1],Math.max(.5,3.2-k*.45),Math.max(.45,.95-k*.06));if(k>0&&Math.random()>.1)seg(P[i][k],P[(i+1)%N][k],Math.max(.4,1.7-k*.2),.6)}
+for(let i=0;i<N*3;i++){const p=P[rnd(0,N)|0][1+(rnd(0,K-2)|0)],b=rnd(0,6.28),L=rnd(25,110);seg(p,[p[0]+Math.cos(b)*L,p[1]+Math.sin(b)*L],rnd(.4,1),.55)}
+/* LCD damage: ink blots + coloured lines */
+for(let i=0;i<7;i++){const bx=x+rnd(-70,70),by=y+rnd(-70,70),br=rnd(18,70),rg=c.createRadialGradient(bx,by,0,bx,by,br);rg.addColorStop(0,'rgba(0,0,0,.92)');rg.addColorStop(.6,'rgba(5,0,15,.6)');rg.addColorStop(1,'rgba(0,0,0,0)');c.fillStyle=rg;c.beginPath();c.ellipse(bx,by,br,br*rnd(.6,1.3),rnd(0,3),0,7);c.fill()}
+['rgba(0,255,120,.5)','rgba(255,0,200,.45)','rgba(0,170,255,.5)','rgba(0,0,0,.85)','rgba(255,255,0,.35)'].forEach(col=>{c.fillStyle=col;c.fillRect(x+rnd(-130,130),rnd(0,y),rnd(1.5,5),h)});
+const ig=c.createRadialGradient(x,y,0,x,y,46);ig.addColorStop(0,'rgba(255,255,255,.95)');ig.addColorStop(.35,'rgba(210,225,255,.45)');ig.addColorStop(1,'rgba(255,255,255,0)');c.fillStyle=ig;c.fillRect(x-46,y-46,92,92);
+for(let i=0;i<60;i++){const a=rnd(0,6.28),d=rnd(2,55);c.fillStyle=`rgba(255,255,255,${rnd(.3,.9)})`;c.fillRect(x+Math.cos(a)*d,y+Math.sin(a)*d,rnd(1,3.5),rnd(1,3.5))}
+/* cracks race outward from the impact point */
+gc.width=w*dp;gc.height=h*dp;gc.style.display='block';trap.style.display='none';
+const t0=performance.now();(function f(n){const p=Math.min(1,(n-t0)/300),m=R*(1-Math.pow(1-p,3));g2.setTransform(1,0,0,1,0,0);g2.clearRect(0,0,gc.width,gc.height);g2.drawImage(bg,0,0,gc.width,gc.height);g2.save();g2.beginPath();g2.arc(x*dp,y*dp,m*dp,0,6.3);g2.clip();g2.drawImage(sc,0,0);g2.restore();if(p<1)requestAnimationFrame(f)})(t0);
+const t=AC.currentTime;burst(t,.05,8,'highpass',3000,.5,LB);tone('triangle',7000,t,.05,3,700,LB);
+burst(t,.9,4,'highpass',1500,.5,LB);burst(t+.02,.3,5,'bandpass',1000,.7,LB);tone('sine',70,t,.5,3.5,28,LB);
+[1180,2930,4170,6200,8300].forEach((f,i)=>tone('sine',f,t+.01,1.5-i*.2,.35/(i+1),0,LB));
+for(let i=0;i<40;i++){const q=t+rnd(.04,1.1);burst(q,.04,rnd(.6,2),'bandpass',rnd(2500,9000),4,LB);if(i%2)tone('triangle',rnd(3000,10000),q,.14,.3,0,LB)}
+vib([250,40,200,40,150,40,100]);flash('#fff',90)}
 
 /* content */
-const FQ=[['هل المقالب آمنة على الهاتف؟','نعم، كل المؤثرات صوت واهتزاز ورسوم داخل المتصفح ولا تضر شاشة الهاتف أو بياناته. والشاشة المكسورة مجرد صورة وهمية.'],['لماذا لا يهتز هاتفي؟','واجهة الاهتزاز غير مدعومة في Safari على iPhone، وقد يكون وضع الصامت أو توفير الطاقة مفعّلاً. جرّب متصفح Chrome على أندرويد.'],['لماذا لا يعمل السوط الحركي؟','وافق على إذن الحساس عند ظهوره في iPhone، وتأكد أن الصفحة تعمل عبر HTTPS. يمكنك دائماً الضغط على زر الطرقعة.'],['هل يُحفظ أي شيء عني؟','لا. كل شيء يعمل على جهازك فقط ولا نرسل أي بيانات أو نستخدم الميكروفون أو الكاميرا.']],
+const FQ=[['هل المقالب آمنة على الهاتف؟','نعم، كل المؤثرات صوت واهتزاز ورسوم داخل المتصفح ولا تضر شاشة الهاتف أو بياناته. والشاشة المكسورة مجرد صورة وهمية.'],['لماذا لا يهتز هاتفي؟','واجهة الاهتزاز غير مدعومة في Safari على iPhone، وقد يكون وضع الصامت أو توفير الطاقة مفعّلاً. جرّب متصفح Chrome على أندرويد.'],['لماذا لا يعمل السوط الحركي؟','وافق على إذن الحساس عند ظهوره في iPhone، وتأكد أن الصفحة تعمل عبر HTTPS. يمكنك دائماً الضغط على زر الطرقعة.'],['هل هناك تنبيه للسلامة؟','تتضمن بعض المؤثرات وميضاً ضوئياً سريعاً واهتزازاً قوياً، لذا لا تستخدمها مع من يعانون حساسية الضوء أو أمراض القلب، ولا مع الأطفال الصغار، ولا أثناء القيادة. اكشف المقلب فوراً.'],['هل يُحفظ أي شيء عني؟','لا. كل شيء يعمل على جهازك فقط ولا نرسل أي بيانات أو نستخدم الميكروفون أو الكاميرا.']],
 DL=[['سياسة الخصوصية','يعمل التطبيق بالكامل داخل متصفحك (100% من جهة العميل). لا نجمع بيانات شخصية، ولا نرسل قراءات الحساسات أو اللمس إلى أي خادم. قد تعرض الإعلانات من أطراف ثالثة ملفات تعريف ارتباط وفق سياساتها.'],['شروط الاستخدام','التطبيق للترفيه فقط. أنت مسؤول عن اختيار من تمازحه، ويُمنع استخدامه لإيذاء الآخرين أو إخافة الأطفال ومرضى القلب أو في الأماكن العامة وأثناء القيادة. يُقدَّم كما هو دون ضمانات.'],['عن الأداة','صندوق المقالب الذكية (PocketPrank) مجموعة مقالب حسية تُولَّد بالكامل بالجافاسكربت: صوت عبر Web Audio، واهتزاز عبر Vibration API، ورسوم عبر Canvas، دون أي ملفات خارجية.']];
 FQ.forEach(([q,a])=>$('#faq').insertAdjacentHTML('beforeend',`<details class="border-b border-slate-800"><summary>${q}</summary><p class="pb-2">${a}</p></details>`));
 DL.forEach(([t,x],i)=>{document.body.insertAdjacentHTML('beforeend',`<dialog id="d${i}" class="pan p-4"><h2 class="font-black text-lg mb-2">${t}</h2><p class="text-sm leading-7">${x}</p><form method="dialog"><button class="mt-3 px-4 py-2 rounded-lg bg-cyan-700">إغلاق</button></form></dialog>`);
